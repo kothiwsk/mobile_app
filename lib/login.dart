@@ -11,7 +11,7 @@ class _LogInViewState extends State<LogInView> {
   void tappedLogIn(_) async {
     DartNotificationCenter.post(
       channel: ObserverNotifications.appStateChanged,
-      options: AppState.app,
+      options: AppState.main,
     );
   }
 
@@ -20,15 +20,18 @@ class _LogInViewState extends State<LogInView> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(bottom: 12),
-              child: Text('Log in'),
+              child: Text(
+                'Welcome!',
+                textAlign: TextAlign.center,
+              ),
             ),
-            GestureDetector(
-              onTapUp: tappedLogIn,
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 32),
               child: TextField(
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(
@@ -36,6 +39,21 @@ class _LogInViewState extends State<LogInView> {
                       color: Color(0x1976D2FF),
                     ),
                   ),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTapUp: tappedLogIn,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: BMColors.actionable_blue,
+                  borderRadius: BorderRadius.circular(7),
+                ),
+                margin: EdgeInsets.only(top: 24),
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 48),
+                child: Text(
+                  'Log in',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),

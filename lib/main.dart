@@ -1,6 +1,7 @@
 import 'package:bill_md_mobile/constants.dart';
 import 'package:bill_md_mobile/login.dart';
 import 'package:dart_notification_center/dart_notification_center.dart';
+import 'package:bill_md_mobile/main_view.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(BillMDApp());
@@ -35,6 +36,9 @@ class _BillMDAppState extends State<BillMDApp> {
       case AppState.auth:
         view = LogInView();
         break;
+      case AppState.main:
+        view = MainView();
+        break;
       default:
         view = null;
         break;
@@ -44,6 +48,13 @@ class _BillMDAppState extends State<BillMDApp> {
       theme: ThemeData(
         primaryColor: Color(0xFF1976D2),
         accentColor: Color(0xFFFF1744),
+        textTheme: TextTheme(
+          body1: TextStyle(
+            color: BMColors.dark_grey,
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+        ),
       ),
       home: view,
     );
