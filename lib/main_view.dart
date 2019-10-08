@@ -21,7 +21,6 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        bottom: false,
         child: Stack(
           children: <Widget>[
             Positioned(
@@ -39,13 +38,7 @@ class _MainViewState extends State<MainView> {
                 height: 80,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 2,
-                      offset: Offset(0, 3),
-                      color: Color(0x1A000000),
-                    )
-                  ],
+                  boxShadow: UIAssets.boxShadow,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

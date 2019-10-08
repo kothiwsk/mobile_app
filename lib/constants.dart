@@ -15,4 +15,15 @@ class BMColors {
   static final dark_grey = Color(0xFF030303);
   static final grey = Color(0xFF4A4A4A);
   static final light_grey = Color(0xFFA4A4A4);
+  static final background_grey = Color(0xFFF3F3F3);
+}
+
+class UIAssets {
+  static final boxShadow = [
+    BoxShadow(
+      blurRadius: 2,
+      offset: Offset(0, 3),
+      color: Color(0x1A000000),
+    )
+  ];
 }

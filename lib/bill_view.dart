@@ -1,3 +1,4 @@
+import 'package:bill_md_mobile/add_bill_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bill_md_mobile/constants.dart';
@@ -8,6 +9,15 @@ class BillView extends StatefulWidget {
 }
 
 class _BillViewState extends State<BillView> {
+  void tappedAddBill(_) {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => AddBillView(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -64,6 +74,7 @@ class _BillViewState extends State<BillView> {
           ),
         ),
         GestureDetector(
+          onTapUp: tappedAddBill,
           child: Container(
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
