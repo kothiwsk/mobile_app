@@ -2,6 +2,10 @@ import 'package:bill_md_mobile/add_bill_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:bill_md_mobile/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'commonComponents/customCard.dart';
+
+
 
 class BillView extends StatefulWidget {
   @override
@@ -66,13 +70,31 @@ class _BillViewState extends State<BillView> {
             ],
           ),
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-          child: Text(
-            'It seems you don\'t have any bills,\nadd one?',
-            textAlign: TextAlign.center,
-          ),
-        ),
+        Container(
+          padding: const EdgeInsets.all(10.0),
+          child: StreamBuilder<QuerySnapshot>(
+            stream: Firestore.instance.collection('tasks')
+              .snapshots(),
+            builder: (BuildContext context,
+              AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError)
+                  return new Text('It seems you don\'t have any bills,\nadd one?');
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return new Text('Loading...');
+                  default:
+                    return new ListView(
+                      children: snapshot.data.documents
+                        .map((DocumentSnapshot document) {
+                          return new CustomCard(
+                            title: document['title'],
+                            description: document['description'],
+                          );
+                      }).toList(),
+                    );
+                }
+              },
+            )),
         GestureDetector(
           onTapUp: tappedAddBill,
           child: Container(

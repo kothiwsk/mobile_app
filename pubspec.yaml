@@ -19,6 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cloud_firestore: ^0.12.9+5
   dart_notification_center: ^1.0.0+1
 
 
