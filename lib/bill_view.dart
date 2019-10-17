@@ -13,73 +13,23 @@ class BillView extends StatefulWidget {
 }
 
 class _BillViewState extends State<BillView> {
-  void tappedAddBill(_) {
-    Navigator.push(
-      context,
-      CupertinoPageRoute(
-        builder: (context) => AddBillView(),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(vertical: 24),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF90E2CD),
-                Color(0xFF7CD3D0),
-              ],
-            ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Icon(
-                Icons.account_balance,
-                color: Colors.white,
-                size: 48,
-              ),
-              Text(
-                'YOUR BILLS',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(48, 12, 48, 0),
-                child: Text(
-                  'Did you know this random fact about medical bills?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Column(
-          children: <Widget>[
-            new Expanded(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("These are your bills"),
+      ),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(10.0),
           child: StreamBuilder<QuerySnapshot>(
             stream: Firestore.instance.collection('useraccounts')
               .snapshots(),
             builder: (BuildContext context,
               AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError)
-                  return new Text('It seems you don\'t have any bills,\nadd one?');
+                  return new Text('Error: ${snapshot.error}');
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
                     return new Text('Loading...');
@@ -96,21 +46,7 @@ class _BillViewState extends State<BillView> {
                 }
               },
             )),
-          ]),
-        GestureDetector(
-          onTapUp: tappedAddBill,
-          child: Container(
-            padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle, color: BMColors.alert_orange),
-            child: Icon(
-              Icons.add,
-              size: 32,
-              color: Colors.white,
-            ),
           ),
-        ),
-      ],
     );
   }
 }
