@@ -19,7 +19,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cloud_firestore: ^0.12.9+5
+  firebase_core: ^0.3.4
+
+  firebase_auth: ^0.8.4+5
+  cloud_firestore: ^0.10.1
+
   dart_notification_center: ^1.0.0+1
 
 
